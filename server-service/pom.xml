@@ -9,14 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>server-core</artifactId>
+    <artifactId>server-service</artifactId>
+
     <dependencies>
         <dependency>
-            <artifactId>server-common</artifactId>
+            <artifactId>server-core</artifactId>
             <groupId>com.wy</groupId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>

@@ -7,6 +7,8 @@
         <module>server-core</module>
         <module>server-common</module>
         <module>server-app</module>
+        <module>server-service</module>
+        <module>server-collect</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -25,6 +27,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mina</groupId>
+            <artifactId>mina-core</artifactId>
+            <version>2.0.13</version>
+        </dependency>
     </dependencies>
 
     <build>

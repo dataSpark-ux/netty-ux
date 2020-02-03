@@ -1,1 +1,13 @@
-
+collect:
+  enable: true
+  listenPort: 8888
+  consumeThreadCount: 1
+  idleTimeout: 600
+app:
+  system: "local"
+  dev: false
+  watch: true
+  authCode: "1234567890A"
+  messageQueueCount: 1
+  messageQueueSize: 100
+  asyncThreads: 10
