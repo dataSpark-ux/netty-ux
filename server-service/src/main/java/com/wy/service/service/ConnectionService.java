@@ -1,17 +1,17 @@
 package com.wy.service.service;
 
-import com.sinoxx.sserver.core.aop.lock.Lock;
-import com.sinoxx.sserver.core.config.ApplicationProperty;
-import com.sinoxx.sserver.service.entity.Connection;
-import com.sinoxx.sserver.service.repository.ConnectionRepository;
+import com.wy.core.aop.lock.Lock;
+import com.wy.core.config.ApplicationProperty;
+import com.wy.service.entity.ConnectionEntity;
 import com.wy.service.repository.ConnectionRepository;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 连接管理服务 => 终端上线、终端下线、终端在线状态更新、连接信息管理
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Created by Kun Tang on 2019/2/25.
  */
-@Log4j
+@Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service
 public class ConnectionService {
@@ -38,7 +38,7 @@ public class ConnectionService {
      *
      * @return
      */
-    public List<Connection> findOnline() {
+    public List<ConnectionEntity> findOnline() {
         return connectionRepository.findBySystemAndConnected(applicationProperty.getSystem(), true);
     }
 
@@ -58,10 +58,11 @@ public class ConnectionService {
      * @return
      */
     @Lock(prefix = "connection_", key = "#onlineNo")
-    public Connection online(String onlineNo, String clientIp) {
-        Connection one = connectionRepository.findOne(onlineNo);
+    public ConnectionEntity online(String onlineNo, String clientIp) {
+        Optional<ConnectionEntity> connection = connectionRepository.findById(onlineNo);
+        ConnectionEntity one = connection.get();
         if (one == null) {
-            one = Connection
+            one = ConnectionEntity
                     .builder()
                     .onlineNo(onlineNo)
                     .connected(true)

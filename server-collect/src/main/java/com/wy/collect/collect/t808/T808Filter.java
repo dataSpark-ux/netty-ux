@@ -1,13 +1,12 @@
-package com.wy.collect.t808;
+package com.wy.collect.collect.t808;
 
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
-import com.sinoxx.sserver.core.cache.MemoryCache;
-import com.sinoxx.sserver.core.protocol.jt808.T808Message;
-import com.sinoxx.sserver.core.util.ToolBuff;
-import com.sinoxx.sserver.service.service.filter.FilterService;
+import com.wy.common.util.ToolBuff;
+import com.wy.core.cache.MemoryCache;
+import com.wy.core.protocol.T808Message;
 import com.wy.service.service.FilterService;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @Author 2018-12-18
  */
-@Log4j
+@Slf4j
 @Service
 public class T808Filter implements FilterService<T808Message>, ApplicationContextAware, RemovalListener<String, Date> {
 

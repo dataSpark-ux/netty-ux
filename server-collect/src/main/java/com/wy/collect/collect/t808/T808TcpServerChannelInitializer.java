@@ -1,10 +1,12 @@
-package com.wy.collect.t808;
+package com.wy.collect.collect.t808;
 
+import com.wy.collect.collect.t808.decoder.T808ProtocolDecoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author wangyi
  */
-@Log4j
+@Slf4j
 @Component
 public class T808TcpServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 

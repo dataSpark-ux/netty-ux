@@ -1,6 +1,7 @@
 package com.wy.common.util;
 
-import org.apache.commons.codec.binary.Hex;
+
+import cn.hutool.core.util.HexUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -85,7 +86,7 @@ public class ToolBuff {
      * 字节序转化为十六进制字符串（大写）
      */
     public static String encodeHexString(byte[] bytes) {
-        return Hex.encodeHexString(bytes).toUpperCase();
+        return HexUtil.encodeHexStr(bytes).toUpperCase();
     }
 
     /**

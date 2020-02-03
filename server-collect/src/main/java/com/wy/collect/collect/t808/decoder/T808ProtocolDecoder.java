@@ -1,12 +1,11 @@
-package com.wy.collect.t808.decoder;
+package com.wy.collect.collect.t808.decoder;
 
-import com.sinoxx.sserver.collect.server.t808.T808Filter;
-import com.sinoxx.sserver.collect.trace.Trace;
-import com.sinoxx.sserver.core.exception.SinoXXException;
-import com.sinoxx.sserver.core.protocol.jt808.T808Message;
-import com.sinoxx.sserver.core.util.SpringHelper;
-import com.wy.collect.collect.trace.Trace;
+
+import com.wy.core.exception.BizException;
+import com.wy.core.trace.Trace;
 import com.wy.common.util.SpringHelper;
+import com.wy.collect.collect.t808.T808Filter;
+import com.wy.core.protocol.T808Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
@@ -80,7 +79,7 @@ public class T808ProtocolDecoder extends ByteToMessageDecoder {
                         out.add(message);
                         // 发送
                         trace.up(message, tmp);
-                    } catch (SinoXXException se) {
+                    } catch (BizException se) {
                         return;
                     } catch (Exception e) {
                         return;

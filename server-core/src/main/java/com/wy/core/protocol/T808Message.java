@@ -1,18 +1,17 @@
-package com.wy.collect.t808;
+package com.wy.core.protocol;
 
-import com.sinoxx.sserver.core.exception.SinoXXException;
-import com.sinoxx.sserver.core.protocol.IPackage;
-import com.sinoxx.sserver.core.protocol.IPackageBody;
-import com.sinoxx.sserver.core.util.MyBuffer;
-import com.sinoxx.sserver.core.util.ToolBuff;
+import cn.hutool.core.util.HexUtil;
+import com.wy.common.enums.ResultCodeEnum;
+import com.wy.common.util.BufferUtil;
+import com.wy.common.util.ToolBuff;
+import com.wy.core.exception.BizException;
 import com.wy.core.protocol.IPackage;
+import com.wy.core.protocol.IPackageBody;
+import com.wy.core.protocol.T808MessageFactory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 
@@ -92,7 +91,7 @@ public class T808Message implements IPackage, Serializable {
     }
 
     public final byte[] writeToBytes() {
-        MyBuffer buff = new MyBuffer();
+        BufferUtil buff = new BufferUtil();
         // buff. mark();
         byte[] bodyBytes = null;
         if (getMessageContents() != null) {
@@ -140,8 +139,8 @@ public class T808Message implements IPackage, Serializable {
         _checkSum = new byte[]{xor};
         if (xor != realXor) {
             setErrorMessage("校验码不正确");
-            logger.warn("T808Message 原始数据错误, 校验码错误 : " + Hex.encodeHexString((messageBytes)));
-            throw new SinoXXException("000000");
+            log.warn("T808Message 原始数据错误, 校验码错误 : " + HexUtil.encodeHexStr((messageBytes)));
+            throw new BizException(ResultCodeEnum.OPERATION_FAILED);
         }
 
         try {
@@ -171,16 +170,17 @@ public class T808Message implements IPackage, Serializable {
                     if (header.isEncryption()) {
                         // 消息加密
                         log.warn(String.format("808消息加密传输 => [ %s ]", hexMsg));
-                        throw new SinoXXException("000000");
+                        throw new BizException(ResultCodeEnum.OPERATION_FAILED);
                     }
                     setMessageContents(T808MessageFactory.Create(header.getMessageType(), sourceData));
                 }
             }
         } catch (Exception ex) {
             setErrorMessage("解析异常:" + ex.getMessage());
-            logger.warn("T808Message 原始数据错误, 解析异常 : " + Hex.encodeHexString((messageBytes)));
-            throw new SinoXXException("000000");
+            log.warn("T808Message 原始数据错误, 解析异常 : " + HexUtil.encodeHexStr((messageBytes)));
+            throw new BizException(ResultCodeEnum.OPERATION_FAILED);
         }
+
     }
 
     /**
@@ -198,7 +198,7 @@ public class T808Message implements IPackage, Serializable {
      * 将标识字符的转义字符还原
      */
     private byte[] unEscape(byte[] data) {
-        MyBuffer buff = new MyBuffer();
+        BufferUtil buff = new BufferUtil();
         for (int i = 0; i < data.length; i++) {
             if (data[i] == 0x7D) {
                 if (data[i + 1] == 0x01) {
@@ -220,7 +220,7 @@ public class T808Message implements IPackage, Serializable {
      * 加入标示符的转义进行封装
      */
     private byte[] escape(byte[] data) {
-        MyBuffer tmp = new MyBuffer();
+        BufferUtil tmp = new BufferUtil();
         for (int j = 0; j < data.length; j++) {
             if (data[j] == 0x7D) {
                 tmp.put((byte) 0x7D);

@@ -3,6 +3,7 @@ package com.wy.core.config;
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 全局配置
@@ -10,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author
  */
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "app")
 public class ApplicationProperty implements InitializingBean {
 

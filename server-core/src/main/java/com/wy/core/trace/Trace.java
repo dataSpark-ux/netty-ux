@@ -1,9 +1,10 @@
-package com.wy.collect.collect.trace;
+package com.wy.core.trace;
 
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.StrUtil;
 import com.wy.core.protocol.IPackage;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author wangyi
  */
-@Log4j
+@Slf4j
 @Service
 public class Trace {
 

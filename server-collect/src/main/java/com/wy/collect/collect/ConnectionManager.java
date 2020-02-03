@@ -1,8 +1,8 @@
-package com.wy.collect.collect.connection;
+package com.wy.collect.collect;
 
 import cn.hutool.core.util.StrUtil;
-import com.wy.core.trace.Trace;
 import com.wy.core.protocol.IPackage;
+import com.wy.core.trace.Trace;
 import com.wy.service.service.ConnectionService;
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
@@ -17,9 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 连接管理器 - 管理一种消息类型, 对应终端的所有连接
- * @author wy
  * <p>
- *
+ * Created by Kun Tang on 2019/2/12.
  */
 @Slf4j
 public abstract class ConnectionManager<T extends IPackage> implements InitializingBean, DisposableBean {

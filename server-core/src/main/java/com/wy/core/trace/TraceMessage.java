@@ -1,4 +1,4 @@
-package com.wy.collect.collect.trace;
+package com.wy.core.trace;
 
 
 import com.alibaba.fastjson.JSON;

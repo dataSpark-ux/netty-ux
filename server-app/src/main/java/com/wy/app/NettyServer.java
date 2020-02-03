@@ -1,7 +1,7 @@
 package com.wy.app;
 
-import com.wy.collect.collect.CollectProperty;
-import com.wy.collect.t808.T808TcpServerChannelInitializer;
+import com.wy.core.config.CollectProperty;
+import com.wy.collect.collect.t808.T808TcpServerChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -11,7 +11,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
