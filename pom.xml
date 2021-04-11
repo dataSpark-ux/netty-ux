@@ -9,6 +9,7 @@
         <module>server-app</module>
         <module>server-service</module>
         <module>server-collect</module>
+        <module>netty-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,7 +17,7 @@
         <version>2.2.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.wy</groupId>
+    <groupId>com.netty</groupId>
     <artifactId>netty-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>netty-server</name>
